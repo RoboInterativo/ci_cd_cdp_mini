@@ -14,7 +14,8 @@ parameters {
    string(
     name: 'BRANCH',
     defaultValue: 'feature/init',
-    description: 'CODE_REPO')
+    description: 'BRANCH'
+  )
 
  }
 
@@ -28,7 +29,7 @@ parameters {
            doGenerateSubmoduleConfigurations: false,
            extensions: [[$class: 'RelativeTargetDirectory',
            relativeTargetDir: 'app/']], gitTool: 'Default',
-           submoduleCfg: [], userRemoteConfigs: [[credentialsId: CREDS,
+           submoduleCfg: [], userRemoteConfigs: [[credentialsId: 	'ssh_for_jenkins',
            url: CODE_REPO]]])
 
 
