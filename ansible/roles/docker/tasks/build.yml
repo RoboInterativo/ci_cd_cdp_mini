@@ -1,0 +1,14 @@
+---
+# - name: Create site.conf
+#   template:
+#      src: site.conf
+#      dest: '{{ nginx_docker_workdir}}/nginx/files/site.conf'
+
+
+- name: Build an image and push it to a private repo
+  docker_image:
+    name: nginx
+    build:
+      path: '{{ nginx_docker_workdir }}/nginx/'
+    force_source: yes
+    source: build

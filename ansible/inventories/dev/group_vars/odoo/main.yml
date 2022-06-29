@@ -1,0 +1,40 @@
+test_var: geekslore
+
+nodejs_url: https://nodejs.org/dist/v16.13.2/node-v16.13.2-linux-x64.tar.xz
+applicatation_env:
+  DB_USER: test
+  DB_PASSWD: ceec4eif7ya
+  DB_HOST: localhost
+  DB_PORT: 5432
+  DB_DATABASE: test
+  DB_minsize: 1
+  DB_maxsize: 5
+
+db_name: robo
+db_user: robo
+
+node_version: 16.13.2
+db_version: 9.6
+DB_USER: postgres
+# DB_PASSWD: !vault |
+#   $ANSIBLE_VAULT;1.1;AES256
+#   36366461656565376466323333633736663134616339333635646338343430363764666435643764
+#   6463313766336661613539333865303765343435353466370a333736643233363536323532643134
+#   64316461393864383065326632363261613862643633363939356534346663353431326531613162
+#   3764346165303736640a363063336533356139376635306235333534383333316331633964313837
+#   3537
+
+DB_HOST: odoo
+DB_PORT: 5432
+DB_DATABASE: odoo
+
+ODOO_VER: 14
+
+
+POSTGRES_DB: '{{DB_DATABASE }}'
+POSTGRES_USER: '{{DB_USER}}'
+POSTGRES_PASSWORD: '{{DB_PASSWD}}'
+      #
+      # - odoo-web-data:/var/lib/odoo
+      # - ./config:/etc/odoo
+      # - ./addons:/mnt/extra-addons
