@@ -24,13 +24,27 @@ parameters {
        steps {
          script {
            sh 'echo HELLO'
+           // git clone CODE_REPO -b BRANCH app/
 
            checkout([$class: 'GitSCM', branches: [[name: BRANCH]],
            doGenerateSubmoduleConfigurations: false,
            extensions: [[$class: 'RelativeTargetDirectory',
            relativeTargetDir: 'app/']], gitTool: 'Default',
-           submoduleCfg: [], userRemoteConfigs: [[credentialsId: 	'ssh_for_jenkins',
+           submoduleCfg: [], userRemoteConfigs: [[credentialsId: 	'ssh_key',
            url: CODE_REPO]]])
+
+           withCredentials([sshUserPrivateKey(credentialsId: CREDS,
+                                             keyFileVariable: 'JENKINS_PRIVATE_KEY', passphraseVariable: 'PASSPHRASE',
+                                              usernameVariable: 'USERNAME')]) {
+
+           playbook_name = "deploy.yml"
+           tags='front'
+           ansiblePlaybook extras:   "-u root --private-key ${JENKINS_PRIVATE_KEY} -vv --extra-vars  \" workspace=${WORKSPACE}    ssh_key=${JENKINS_PRIVATE_KEY} inventory_dir=\"inventories/dev/\"\" ",
+           installation: 'ansible29',
+           inventory: "${WORKSPACE}/ansible/inventories/dev/inventory",
+           playbook: "${WORKSPACE}/ansible/${playbook_name}"
+
+
 
 
          }
