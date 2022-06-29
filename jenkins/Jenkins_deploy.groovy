@@ -14,7 +14,7 @@ parameters {
    string(
     name: 'BRANCH',
     defaultValue: 'feature/init',
-    description: 'CODE_REPO'
+    description: 'CODE_REPO')
 
  }
 
