@@ -33,7 +33,7 @@ parameters {
            submoduleCfg: [], userRemoteConfigs: [[credentialsId: 	'ssh_key',
            url: CODE_REPO]]])
 
-           withCredentials([sshUserPrivateKey(credentialsId: CREDS,
+           withCredentials([sshUserPrivateKey(credentialsId: 'ssh_key',
                                              keyFileVariable: 'JENKINS_PRIVATE_KEY', passphraseVariable: 'PASSPHRASE',
                                               usernameVariable: 'USERNAME')]) {
 
@@ -51,6 +51,7 @@ parameters {
         }
       }
    }
+
    post {
        success {
 
@@ -60,3 +61,4 @@ parameters {
      }
 
  }
+}
