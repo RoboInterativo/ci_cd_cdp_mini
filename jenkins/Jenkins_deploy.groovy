@@ -19,7 +19,7 @@ parameters {
 
  }
 
-   stages() {
+   stages()
      stage('Test1' ) {
        steps {
          script {
@@ -51,6 +51,7 @@ parameters {
         }
       }
    }
+ }
 
    post {
        success {
@@ -60,5 +61,5 @@ parameters {
        }
      }
 
- }
+
 }
