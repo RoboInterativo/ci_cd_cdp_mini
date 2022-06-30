@@ -81,6 +81,19 @@ pipeline {
 
 
               sh "echo archiveAPP  && ls app && zip ${WORKSPACE}/ansible/files/app.zip app -r"
+
+
+
+              withCredentials([sshUserPrivateKey(credentialsId: 'ssh_key',
+                                                keyFileVariable: 'JENKINS_PRIVATE_KEY', passphraseVariable: 'PASSPHRASE',
+                                                 usernameVariable: 'USERNAME')]) {
+
+              playbook_name = "deploy.yml"
+              tags='front'
+              ansiblePlaybook extras:   "-u root --private-key ${JENKINS_PRIVATE_KEY} -vv --extra-vars  \" workspace=${WORKSPACE}    ssh_key=${JENKINS_PRIVATE_KEY} inventory_dir=\"inventories/dev/\"\" ",
+              installation: 'ansible29',
+              inventory: "${WORKSPACE}/ansible/inventories/dev/inventory",
+              playbook: "${WORKSPACE}/ansible/${playbook_name}"
             }
           }
         }
